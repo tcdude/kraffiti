@@ -11,7 +11,7 @@ on:
 
 jobs:
   build_job:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     name: Build on ${{ matrix.distro }} ${{ matrix.arch }}
 
     # Run steps for both armv6 and aarch64
