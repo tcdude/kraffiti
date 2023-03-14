@@ -4,6 +4,7 @@ on:
   push:
     branches:
     - main
+    - really-fix-linux-arm-action
   pull_request:
     branches:
     - main
@@ -58,7 +59,7 @@ jobs:
           install: |
               apt-get update -y -q
               apt-get upgrade -y -q
-              apt-get install -y -q libasound2-dev libxinerama-dev libgl1-mesa-dev libxi-dev git build-essential
+              apt-get install -y -q libasound2-dev libxinerama-dev libgl1-mesa-dev libxi-dev git build-essential ninja
 
           # Produce a binary artifact and place it in the mounted volume
           run: |
@@ -67,12 +68,16 @@ jobs:
             echo " * Compile"
             ./${{ matrix.repo }}/kmake --compile
             echo " * Copying artifact"
+            ls -lah /artifacts/kraffiti
             cp build/Release/kraffiti "/artifacts/kraffiti"
+            ls -lah /artifacts/kraffiti
 
       - name: Get binary-repository
         run: git clone https://github.com/Kode/${{ matrix.repo }}.git KincTools
       - name: Copy binary
         run: cp "${PWD}/artifacts/kraffiti" KincTools/kraffiti
+      - name: Show contents of /artifacts
+        run: ls -lah "${PWD}/artifacts"
       - name: Set name
         run: git config --global user.name "Robbot"
       - name: Set email
