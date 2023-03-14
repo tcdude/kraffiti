@@ -75,9 +75,13 @@ jobs:
       - name: Get binary-repository
         run: git clone https://github.com/Kode/${{ matrix.repo }}.git KincTools
       - name: Copy binary
-        run: cp "${PWD}/artifacts/kraffiti" KincTools/kraffiti
+        run: cp -v "${PWD}/artifacts/kraffiti" KincTools/kraffiti
       - name: Show contents of /artifacts
         run: ls -lah "${PWD}/artifacts"
+      - name: Show contents of KincTools
+        run: ls -lah KincTools
+      - name: Git status of KincTools
+        run: git -C KincTools status
       - name: Set name
         run: git config --global user.name "Robbot"
       - name: Set email
