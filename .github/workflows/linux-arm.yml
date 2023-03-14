@@ -68,7 +68,7 @@ jobs:
             echo " * Compile"
             ./${{ matrix.repo }}/kmake --compile
             echo " * Copying artifact"
-            ls -lah /artifacts/kraffiti
+            ls -lah /artifacts
             cp build/Release/kraffiti "/artifacts/kraffiti"
             ls -lah /artifacts/kraffiti
 
